@@ -1,0 +1,31 @@
+{
+	"name": "plugin-vkn-erp-core",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "packages/plugins/vkn-erp-core/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/packages/plugins/vkn-erp-core",
+				"tsConfig": "packages/plugins/vkn-erp-core/tsconfig.lib.json",
+				"packageJson": "packages/plugins/vkn-erp-core/package.json",
+				"main": "packages/plugins/vkn-erp-core/src/index.ts",
+				"assets": ["packages/plugins/vkn-erp-core/*.md"]
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "packages/plugins/vkn-erp-core/jest.config.ts"
+			}
+		}
+	},
+	"tags": ["type:plugin", "scope:vkn-erp"]
+}
