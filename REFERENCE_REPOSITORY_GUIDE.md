@@ -171,26 +171,39 @@ router.post('/journal-entries', async (req, res) => {
 
 ```typescript
 // vkn-journal-entry.controller.ts
-@Post()
-@ApiOperation({ summary: 'Create journal entry' })
-async create(@Body() dto: CreateJournalEntryDto) {
-  // Same business logic
-  if (dto.lines.length < 2) {
-    throw new BadRequestException('At least 2 lines required');
+import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { VknJournalEntryService } from '../services/vkn-journal-entry.service';
+import { CreateJournalEntryDto } from '../dto/journal-entry.dto';
+
+@ApiTags('VKN ERP Finance - Journal Entries')
+@Controller('vkn-erp/finance/journal-entries')
+export class VknJournalEntryController {
+  constructor(
+    private readonly journalEntryService: VknJournalEntryService
+  ) {}
+
+  @Post()
+  @ApiOperation({ summary: 'Create journal entry' })
+  async create(@Body() dto: CreateJournalEntryDto) {
+    // Same business logic as reference
+    if (dto.lines.length < 2) {
+      throw new BadRequestException('At least 2 lines required');
+    }
+    
+    const totalDebit = dto.lines.reduce((sum, line) => 
+      sum + (line.debit || 0), 0
+    );
+    const totalCredit = dto.lines.reduce((sum, line) => 
+      sum + (line.credit || 0), 0
+    );
+    
+    if (totalDebit !== totalCredit) {
+      throw new BadRequestException('Debit and credit must be equal');
+    }
+    
+    return this.journalEntryService.create(dto);
   }
-  
-  const totalDebit = dto.lines.reduce((sum, line) => 
-    sum + (line.debit || 0), 0
-  );
-  const totalCredit = dto.lines.reduce((sum, line) => 
-    sum + (line.credit || 0), 0
-  );
-  
-  if (totalDebit !== totalCredit) {
-    throw new BadRequestException('Debit and credit must be equal');
-  }
-  
-  return this.journalEntryService.create(dto);
 }
 ```
 
@@ -313,6 +326,18 @@ CREATE TABLE accounts (
 **Migration (TypeORM):**
 ```typescript
 // vkn-account.entity.ts
+import { Entity, Column } from 'typeorm';
+import { TenantOrganizationBaseEntity } from '@gauzy/core';
+
+// Define enum
+export enum AccountType {
+  ASSET = 'ASSET',
+  LIABILITY = 'LIABILITY',
+  EQUITY = 'EQUITY',
+  REVENUE = 'REVENUE',
+  EXPENSE = 'EXPENSE'
+}
+
 @Entity('vkn_accounts')
 export class VknAccount extends TenantOrganizationBaseEntity {
   @Column({ length: 20, unique: true })
@@ -323,9 +348,9 @@ export class VknAccount extends TenantOrganizationBaseEntity {
 
   @Column({ 
     type: 'enum', 
-    enum: ['ASSET', 'LIABILITY', 'EQUITY', 'REVENUE', 'EXPENSE'] 
+    enum: AccountType
   })
-  type: string;
+  type: AccountType;
 
   @Column({ nullable: true })
   parentId: number;
@@ -360,16 +385,36 @@ const validateJournalEntry = (entry) => {
 **Migration (NestJS):**
 ```typescript
 // vkn-journal-entry.service.ts
-private validateEntry(dto: CreateJournalEntryDto): void {
-  if (!dto.lines || dto.lines.length < 2) {
-    throw new BadRequestException('At least 2 lines required');
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateJournalEntryDto } from '../dto/journal-entry.dto';
+import { VknJournalEntry } from '../entities/vkn-journal-entry.entity';
+
+@Injectable()
+export class VknJournalEntryService {
+  constructor(
+    @InjectRepository(VknJournalEntry)
+    private readonly repository: Repository<VknJournalEntry>
+  ) {}
+
+  private validateEntry(dto: CreateJournalEntryDto): void {
+    if (!dto.lines || dto.lines.length < 2) {
+      throw new BadRequestException('At least 2 lines required');
+    }
+    
+    const debit = dto.lines.reduce((sum, l) => sum + (l.debit || 0), 0);
+    const credit = dto.lines.reduce((sum, l) => sum + (l.credit || 0), 0);
+    
+    if (Math.abs(debit - credit) > 0.01) {
+      throw new BadRequestException('Entry must be balanced');
+    }
   }
-  
-  const debit = dto.lines.reduce((sum, l) => sum + (l.debit || 0), 0);
-  const credit = dto.lines.reduce((sum, l) => sum + (l.credit || 0), 0);
-  
-  if (Math.abs(debit - credit) > 0.01) {
-    throw new BadRequestException('Entry must be balanced');
+
+  async create(dto: CreateJournalEntryDto) {
+    this.validateEntry(dto);
+    // Create journal entry...
+    return this.repository.save(dto);
   }
 }
 ```
