@@ -26,7 +26,7 @@ import {
 @ApiTags('VKN ERP Core')
 @ApiBearerAuth()
 @UseGuards(TenantPermissionGuard, PermissionGuard)
-@Controller('vkn-erp/core/company-settings')
+@Controller('company-settings')
 export class VknCompanySettingsController {
 	constructor(
 		private readonly companySettingsService: VknCompanySettingsService
@@ -57,8 +57,10 @@ export class VknCompanySettingsController {
 		@Param('organizationId') organizationId: string,
 		@Body() dto: CreateCompanySettingsDTO
 	) {
-		// In real implementation, get tenantId from request context
-		const tenantId = 'default-tenant-id'; // TODO: Get from RequestContext
+		// TODO: Implement proper tenant extraction from RequestContext
+		// import { RequestContext } from '@gauzy/core';
+		// const tenantId = RequestContext.currentTenantId();
+		const tenantId = 'default-tenant-id'; // TEMPORARY: Replace with RequestContext
 		return await this.companySettingsService.upsert(organizationId, tenantId, dto);
 	}
 
@@ -73,7 +75,10 @@ export class VknCompanySettingsController {
 		@Param('organizationId') organizationId: string,
 		@Body() dto: UpdateCompanySettingsDTO
 	) {
-		const tenantId = 'default-tenant-id'; // TODO: Get from RequestContext
+		// TODO: Implement proper tenant extraction from RequestContext
+		// import { RequestContext } from '@gauzy/core';
+		// const tenantId = RequestContext.currentTenantId();
+		const tenantId = 'default-tenant-id'; // TEMPORARY: Replace with RequestContext
 		return await this.companySettingsService.upsert(organizationId, tenantId, dto);
 	}
 
