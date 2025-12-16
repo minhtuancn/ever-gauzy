@@ -1,8 +1,71 @@
 # 🚀 HƯỚNG DẪN TRIỂN KHAI DỰ ÁN VKN ERP
 
 **Tài liệu chính:** `HIEN_TRANG_DU_AN.md` + `BANG_THEO_DOI_TIEN_DO.md`  
+**Repository tham khảo:** https://github.com/minhtuancn/vietkeynet-erp-reference  
 **Ngày:** 16/12/2025  
 **Trạng thái:** 🟢 Đang triển khai Phase 2
+
+---
+
+## 📚 NGUỒN THAM KHẢO
+
+### Repository Reference - Vietkeynet ERP
+**URL:** https://github.com/minhtuancn/vietkeynet-erp-reference
+
+**Mô tả:**
+- Hệ thống ERP hoàn chỉnh với 72+ modules
+- React 19 + TypeScript frontend
+- Express.js backend với 39 routes
+- 409+ components, 2,866+ i18n keys
+- RBAC system: 16 roles, 560+ permissions
+- Production ready v1.0.4
+
+**Sử dụng:**
+- ✅ **Tham khảo module structure** - Xem cách tổ chức code
+- ✅ **Tham khảo business logic** - Hiểu yêu cầu từng module
+- ✅ **Tham khảo API design** - Endpoint patterns
+- ✅ **Tham khảo entities** - Database schema
+- ✅ **Tham khảo features** - Tính năng chi tiết
+
+**Backend routes (39 modules):**
+```
+backend/src/routes/
+├── accounting.js      - Kế toán tổng hợp
+├── analytics.js       - Phân tích dữ liệu
+├── auth.js           - Xác thực
+├── chat.js           - Chat & AI Assistant
+├── contacts.js       - Quản lý liên hệ
+├── crm.js            - CRM
+├── dashboard.js      - Dashboard
+├── delivery.js       - Giao hàng
+├── e-invoice.js      - Hóa đơn điện tử
+├── fleet.js          - Quản lý xe
+├── helpdesk.js       - Hỗ trợ khách hàng
+├── hr.js             - Nhân sự
+├── integrations.js   - Tích hợp bên thứ 3
+├── inventory.js      - Kho hàng
+├── notifications.js  - Thông báo
+├── payments.js       - Thanh toán
+├── pos.js            - Bán hàng tại quầy
+├── production.js     - Sản xuất
+├── products.js       - Sản phẩm
+├── purchasing.js     - Mua hàng
+├── reports.js        - Báo cáo
+├── sales.js          - Bán hàng
+├── tenants.js        - Multi-tenant
+├── time-tracking.js  - Chấm công
+├── todos.js          - Công việc
+├── warehouse.js      - Kho
+├── weighing.js       - Cân đo
+├── workflows.js      - Quy trình
+└── ... (12+ routes khác)
+```
+
+**Lưu ý quan trọng:**
+- 🔍 Đây là reference implementation (React/Express)
+- 🔄 Cần migrate sang Ever Gauzy (Angular/NestJS)
+- 📋 Giữ nguyên business logic và features
+- 🏗️ Adapt architecture cho plugin-based system
 
 ---
 

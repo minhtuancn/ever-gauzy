@@ -1,7 +1,8 @@
 # 🗺️ VKN ERP Development Roadmap Summary
 
 **Generated:** December 16, 2025  
-**Based on:** `CURRENT_STATUS_AND_NEXT_STEPS.md` + `HIEN_TRANG_DU_AN.md`
+**Based on:** `CURRENT_STATUS_AND_NEXT_STEPS.md` + `HIEN_TRANG_DU_AN.md`  
+**Reference Repository:** https://github.com/minhtuancn/vietkeynet-erp-reference
 
 ---
 
@@ -11,9 +12,26 @@ This document consolidates information from the two most recent project document
 
 ### Project Overview
 - **Goal:** Migrate 72+ Vietkeynet ERP modules to Ever Gauzy platform
+- **Source:** All modules and features based on https://github.com/minhtuancn/vietkeynet-erp-reference
 - **Approach:** Comprehensive Sequential Implementation
 - **Timeline:** 12-18 months (solo developer) or 3-6 months (MVP approach)
 - **Current Progress:** 3.3% (1.1 of 38 modules)
+- **Architecture Migration:** React/Express → Angular/NestJS (plugin-based)
+
+### Reference Implementation
+The original Vietkeynet ERP system (https://github.com/minhtuancn/vietkeynet-erp-reference) provides:
+- ✅ Complete business logic for all 72+ modules
+- ✅ Backend APIs in `backend/src/routes/` (39 route files)
+- ✅ Frontend pages and components
+- ✅ Database schemas and relationships
+- ✅ RBAC system (16 roles, 560+ permissions)
+- ✅ Production-ready features (v1.0.4)
+
+**Migration Strategy:**
+- Use reference repo to understand features and requirements
+- Adapt business logic to NestJS/TypeORM
+- Convert React components to Angular
+- Maintain all functionality while adopting Ever Gauzy architecture
 
 ---
 

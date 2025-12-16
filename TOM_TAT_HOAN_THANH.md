@@ -2,6 +2,7 @@
 
 **Ngày:** 16/12/2025  
 **Task:** Đọc thông tin 2 tệp MD để nắm lộ trình phát triển  
+**Repository tham khảo:** https://github.com/minhtuancn/vietkeynet-erp-reference  
 **Status:** ✅ HOÀN THÀNH
 
 ---
@@ -14,9 +15,42 @@
 ### Yêu cầu bổ sung:
 > "HIEN_TRANG_DU_AN.md BANG_THEO_DOI_TIEN_DO.md và 2 tệp này là nội dung đang cần triển khai"
 
+### Yêu cầu quan trọng:
+> "Toàn bộ các module và tính năng được lấy theo nội dung từ repo này: https://github.com/minhtuancn/vietkeynet-erp-reference"
+
 ---
 
 ## ✅ ĐÃ HOÀN THÀNH
+
+### 0. Repository Tham Khảo
+
+#### 📚 Vietkeynet ERP Reference
+**URL:** https://github.com/minhtuancn/vietkeynet-erp-reference
+
+- ✅ Clone và phân tích repository
+- ✅ Xác định 72+ modules (React/Express stack)
+- ✅ 39 backend routes trong `backend/src/routes/`
+- ✅ Production ready v1.0.4
+- ✅ RBAC: 16 roles, 560+ permissions
+- ✅ 409+ components, 2,866+ i18n keys
+
+**Backend modules có sẵn:**
+- accounting.js (kế toán)
+- analytics.js (phân tích)
+- crm.js (CRM)
+- inventory.js (kho)
+- production.js (sản xuất)
+- sales.js (bán hàng)
+- purchasing.js (mua hàng)
+- hr.js (nhân sự)
+- e-invoice.js (hóa đơn điện tử)
+- ... và 30+ routes khác
+
+**Sử dụng để:**
+- ✅ Hiểu business logic từng module
+- ✅ Tham khảo API design
+- ✅ Tham khảo database schema
+- ✅ Migration từ React/Express → Angular/NestJS
 
 ### 1. Đọc và Phân Tích 2 Tệp Chính
 

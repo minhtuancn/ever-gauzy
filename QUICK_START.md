@@ -2,7 +2,28 @@
 
 **Last Updated:** December 16, 2025  
 **Current Phase:** Phase 2 - Financial Management  
-**Next Module:** Finance Module (90% remaining)
+**Next Module:** Finance Module (90% remaining)  
+**Reference Repository:** https://github.com/minhtuancn/vietkeynet-erp-reference
+
+---
+
+## 📚 Important: Reference Repository
+
+**All modules and features are based on:**
+https://github.com/minhtuancn/vietkeynet-erp-reference
+
+This is the original Vietkeynet ERP system (React/Express) that contains:
+- 72+ modules with complete business logic
+- Backend routes in `backend/src/routes/`
+- Frontend pages in `src/pages/`
+- Database schemas and entities
+- API implementations
+
+**How to use it:**
+1. ✅ Browse the reference repo for module features
+2. ✅ Check `backend/src/routes/accounting.js` for Finance module logic
+3. ✅ Understand business requirements from existing code
+4. ✅ Migrate features to Ever Gauzy plugin architecture (NestJS/Angular)
 
 ---
 
