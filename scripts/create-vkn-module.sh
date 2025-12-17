@@ -30,6 +30,18 @@ MODULE_NAME_PASCAL=$(echo "$MODULE_NAME" | sed -e 's/\b\(.\)/\u\1/g' -e 's/-//g'
 PLUGIN_DIR="packages/plugins/vkn-erp-${MODULE_NAME_LOWER}"
 BRANCH_NAME="vkn-erp-module_${MODULE_NAME_LOWER}"
 
+# Helper function for cross-platform sed replacement
+sed_replace() {
+    local file="$1"
+    local pattern="$2"
+    local replacement="$3"
+    
+    # Create temporary file
+    local temp_file="${file}.tmp"
+    sed "s/${pattern}/${replacement}/g" "$file" > "$temp_file"
+    mv "$temp_file" "$file"
+}
+
 echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE}VKN ERP Module Generator${NC}"
 echo -e "${BLUE}========================================${NC}"
@@ -331,8 +343,8 @@ export class VknMODULE_NAME_PASCALEntity extends TenantOrganizationBaseEntity {
 EOF
 
 # Replace placeholders in entity file
-sed -i "s/MODULE_NAME_LOWER/${MODULE_NAME_LOWER}/g" "${PLUGIN_DIR}/src/lib/entities/vkn-${MODULE_NAME_LOWER}.entity.ts"
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/entities/vkn-${MODULE_NAME_LOWER}.entity.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/entities/vkn-${MODULE_NAME_LOWER}.entity.ts" "MODULE_NAME_LOWER" "${MODULE_NAME_LOWER}"
+sed_replace "${PLUGIN_DIR}/src/lib/entities/vkn-${MODULE_NAME_LOWER}.entity.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 # Create entities index
 cat > "${PLUGIN_DIR}/src/lib/entities/index.ts" << EOF
@@ -365,7 +377,7 @@ export class UpdateMODULE_NAME_PASCALDTO extends CreateMODULE_NAME_PASCALDTO {}
 EOF
 
 # Replace placeholders in DTO file
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/dto/${MODULE_NAME_LOWER}.dto.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/dto/${MODULE_NAME_LOWER}.dto.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 # Create DTOs index
 cat > "${PLUGIN_DIR}/src/lib/dto/index.ts" << EOF
@@ -401,7 +413,7 @@ export class VknMODULE_NAME_PASCALService extends TenantAwareCrudService<VknMODU
 EOF
 
 # Replace placeholders in service file
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 # Create services index
 cat > "${PLUGIN_DIR}/src/lib/services/index.ts" << EOF
@@ -471,8 +483,8 @@ export class VknMODULE_NAME_PASCALController {
 EOF
 
 # Replace placeholders in controller file
-sed -i "s/MODULE_NAME_LOWER/${MODULE_NAME_LOWER}/g" "${PLUGIN_DIR}/src/lib/controllers/vkn-${MODULE_NAME_LOWER}.controller.ts"
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/controllers/vkn-${MODULE_NAME_LOWER}.controller.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/controllers/vkn-${MODULE_NAME_LOWER}.controller.ts" "MODULE_NAME_LOWER" "${MODULE_NAME_LOWER}"
+sed_replace "${PLUGIN_DIR}/src/lib/controllers/vkn-${MODULE_NAME_LOWER}.controller.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 # Create controllers index
 cat > "${PLUGIN_DIR}/src/lib/controllers/index.ts" << EOF
@@ -505,8 +517,8 @@ export class VknErpMODULE_NAME_PASCALModule {}
 EOF
 
 # Replace placeholders in module file
-sed -i "s/MODULE_NAME_LOWER/${MODULE_NAME_LOWER}/g" "${PLUGIN_DIR}/src/lib/vkn-erp-${MODULE_NAME_LOWER}.module.ts"
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/vkn-erp-${MODULE_NAME_LOWER}.module.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/vkn-erp-${MODULE_NAME_LOWER}.module.ts" "MODULE_NAME_LOWER" "${MODULE_NAME_LOWER}"
+sed_replace "${PLUGIN_DIR}/src/lib/vkn-erp-${MODULE_NAME_LOWER}.module.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 # Create main index file
 cat > "${PLUGIN_DIR}/src/index.ts" << EOF
@@ -559,8 +571,8 @@ describe('VknMODULE_NAME_PASCALService', () => {
 EOF
 
 # Replace placeholders in test file
-sed -i "s/MODULE_NAME_LOWER/${MODULE_NAME_LOWER}/g" "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.spec.ts"
-sed -i "s/MODULE_NAME_PASCAL/${MODULE_NAME_PASCAL}/g" "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.spec.ts"
+sed_replace "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.spec.ts" "MODULE_NAME_LOWER" "${MODULE_NAME_LOWER}"
+sed_replace "${PLUGIN_DIR}/src/lib/services/vkn-${MODULE_NAME_LOWER}.service.spec.ts" "MODULE_NAME_PASCAL" "${MODULE_NAME_PASCAL}"
 
 echo -e "${GREEN}✓ Module structure created successfully!${NC}"
 echo ""
