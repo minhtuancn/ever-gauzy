@@ -1,0 +1,29 @@
+{
+  "name": "plugin-vkn-erp-contracts",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/plugins/vkn-erp-contracts/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/plugins/vkn-erp-contracts",
+        "main": "packages/plugins/vkn-erp-contracts/src/index.ts",
+        "tsConfig": "packages/plugins/vkn-erp-contracts/tsconfig.lib.json",
+        "assets": ["packages/plugins/vkn-erp-contracts/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/plugins/vkn-erp-contracts/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:plugins", "type:vkn-erp"]
+}

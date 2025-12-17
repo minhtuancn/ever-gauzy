@@ -1,0 +1,29 @@
+{
+  "name": "plugin-vkn-erp-bank",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/plugins/vkn-erp-bank/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/plugins/vkn-erp-bank",
+        "main": "packages/plugins/vkn-erp-bank/src/index.ts",
+        "tsConfig": "packages/plugins/vkn-erp-bank/tsconfig.lib.json",
+        "assets": ["packages/plugins/vkn-erp-bank/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/plugins/vkn-erp-bank/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:plugins", "type:vkn-erp"]
+}

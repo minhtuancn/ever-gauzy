@@ -1,0 +1,29 @@
+{
+  "name": "plugin-vkn-erp-sales",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/plugins/vkn-erp-sales/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/plugins/vkn-erp-sales",
+        "main": "packages/plugins/vkn-erp-sales/src/index.ts",
+        "tsConfig": "packages/plugins/vkn-erp-sales/tsconfig.lib.json",
+        "assets": ["packages/plugins/vkn-erp-sales/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/plugins/vkn-erp-sales/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:plugins", "type:vkn-erp"]
+}

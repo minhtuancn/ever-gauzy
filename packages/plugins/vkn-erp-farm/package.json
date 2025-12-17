@@ -1,0 +1,63 @@
+{
+  "name": "@gauzy/plugin-vkn-erp-farm",
+  "version": "1.0.0",
+  "description": "Farm Management Module",
+  "author": {
+    "name": "Minh Tuấn - VietKeyNet Software Solutions",
+    "email": "vietkeynet@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minhtuancn/ever-gauzy",
+    "directory": "packages/plugins/vkn-erp-farm"
+  },
+  "bugs": {
+    "url": "https://github.com/minhtuancn/ever-gauzy/issues"
+  },
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "scripts": {
+    "lib:build": "yarn nx build plugin-vkn-erp-farm",
+    "lib:build:prod": "yarn nx build plugin-vkn-erp-farm",
+    "lib:watch": "yarn nx build plugin-vkn-erp-farm --watch"
+  },
+  "dependencies": {
+    "@gauzy/contracts": "^0.1.0",
+    "@gauzy/core": "^0.1.0",
+    "@gauzy/plugin": "^0.1.0",
+    "@nestjs/common": "^11.1.0",
+    "@nestjs/swagger": "^11.1.5",
+    "@nestjs/typeorm": "^11.0.0",
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/jwt": "^11.0.1",
+    "@nestjs/passport": "^11.1.0",
+    "chalk": "^4.1.0",
+    "class-validator": "^0.14.2",
+    "class-transformer": "^0.5.1",
+    "typeorm": "^0.3.27",
+    "tslib": "^2.6.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.14",
+    "@types/node": "^20.14.9",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "gauzy",
+    "vietkeynet",
+    "erp",
+    "farm",
+    "plugin",
+    "nestjs",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=20.18.1",
+    "yarn": ">=1.22.19"
+  },
+  "sideEffects": false
+}
