@@ -15,6 +15,37 @@ We released [Ever Teams](https://github.com/ever-co/ever-teams) platform for Wor
 Please check <https://github.com/ever-co/ever-teams> and make it ⭐ on GitHub!
 It's built with a React (NextJs) / ReactNative (Expo) stack and connects to headless [Ever Gauzy Platform APIs](https://api.gauzy.co/docs).
 
+## 🚀 VKN ERP Module Development
+
+**New:** We're building a comprehensive ERP system with 38+ modules! 
+
+### Quick Start for Developers
+
+If you want to develop new modules for VKN ERP:
+
+1. **Read the Quick Start Guide:** [QUICK_START_VKN.md](QUICK_START_VKN.md)
+2. **View Module List:** Run `./scripts/list-vkn-modules.sh`
+3. **Create New Module:** Run `./scripts/create-vkn-module.sh <module-name> "<description>"`
+
+### Documentation
+- 📘 [Quick Start Guide](QUICK_START_VKN.md) - Start here!
+- 📖 [Module Development Guide (Vietnamese)](HUONG_DAN_PHAT_TRIEN_MODULE.md) - Detailed step-by-step guide
+- 📋 [Comprehensive Strategy](VKN_ERP_COMPREHENSIVE_STRATEGY.md) - Full roadmap for 38 modules
+- 🔧 [Implementation Guide](VKN_ERP_IMPLEMENTATION_GUIDE.md) - Technical patterns and examples
+- 🌿 [Branching Strategy](BRANCHING_STRATEGY.md) - Git workflow for module development
+
+### Current Status
+- ✅ **Completed:** Phase 1 (Core Module)
+- 🚧 **In Progress:** Phase 2.1 (Finance Module - 10%)
+- ⏳ **Remaining:** 36 modules across 12 phases
+
+### Automation Tools
+Located in `scripts/` directory:
+- `list-vkn-modules.sh` - View all 38 planned modules
+- `create-vkn-module.sh` - Auto-generate complete module structure
+
+**Learn more:** See [scripts/README.md](scripts/README.md)
+
 ## 🌟 What is it
 
 [Ever® Gauzy™][uri_gauzy] - **Open Business Management Platform** for Collaborative, On-Demand and Sharing Economies.
